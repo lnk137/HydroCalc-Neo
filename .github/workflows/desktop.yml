@@ -2,7 +2,7 @@ name: Desktop verification and builds
 
 on:
   push:
-    branches: [master, 'refactor/**']
+    branches: [main, 'refactor/**']
   pull_request:
   workflow_dispatch:
 
@@ -41,6 +41,6 @@ jobs:
         run: npx electron-forge make
       - uses: actions/upload-artifact@v4
         with:
-          name: HydroCalc-${{ matrix.os }}
+          name: HydroCalc-Neo-${{ matrix.os }}
           path: out/make/**
           if-no-files-found: error
