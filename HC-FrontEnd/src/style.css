@@ -155,19 +155,21 @@ h3 {
 .brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   text-decoration: none;
   color: var(--text);
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 650;
   letter-spacing: -0.6px;
-  padding: 0 10px;
-  /* 展开侧栏时将品牌名保持在同一行。 */
+  /* 保留左侧对齐，将剩余宽度留给完整的品牌名称。 */
+  padding: 0 0 0 10px;
   white-space: nowrap;
 }
 .brand-symbol {
   display: grid;
   place-items: center;
+  /* 名称变长时保持图标的尺寸。 */
+  flex-shrink: 0;
   width: 33px;
   height: 36px;
   color: var(--accent-text);
@@ -1517,10 +1519,10 @@ dd {
     width: calc(100% - 180px);
   }
   .brand {
-    font-size: 18px;
+    font-size: 16px;
     gap: 5px;
-    /* 中等宽度时用右侧空白容纳完整名称，保留左侧对齐。 */
-    padding-right: 0;
+    /* 侧栏缩窄后减少缩进，给完整名称留出空间。 */
+    padding-left: 5px;
   }
   .sidebar-caption {
     padding-left: 48px;
