@@ -16,8 +16,15 @@ const { translate } = require("./i18n.cjs");
 
 const root = path.resolve(__dirname, "..");
 const development = process.argv.includes("--dev");
-if (process.env.HYDROCALC_DATA_DIR)
-  app.setPath("userData", process.env.HYDROCALC_DATA_DIR);
+const productName = app.getName();
+
+// 在获取单实例锁前沿用旧数据目录，避免改名后找不到历史、设置和原图。
+// 测试和自定义部署仍可通过环境变量指定独立目录。
+const appData = app.getPath("appData");
+const legacyDataDir = path.join(appData, "hydrocalc");
+const dataDir = process.env.HYDROCALC_DATA_DIR || legacyDataDir;
+app.setPath("userData", dataDir);
+
 let service;
 let window;
 let vite;
@@ -95,7 +102,6 @@ function rebuildMenu() {
 }
 
 async function start() {
-  const dataDir = process.env.HYDROCALC_DATA_DIR || app.getPath("userData");
   const executable =
     process.platform === "win32" ? "hydrocalc-worker.exe" : "hydrocalc-worker";
   const worker = app.isPackaged
@@ -123,12 +129,12 @@ async function start() {
     url = vite.resolvedUrls.local[0];
   }
   origin = new URL(url).origin;
-  console.log("HydroCalc URL:", url);
+  console.log(`${productName} URL:`, url);
 
   // 操作系统主题与网页样式保持一致；原生窗口允许缩放而不是固定尺寸。
   const workArea = screen.getPrimaryDisplay().workAreaSize;
   window = new BrowserWindow({
-    title: "HydroCalc",
+    title: productName,
     width: Math.min(1390, workArea.width),
     height: Math.min(980, workArea.height),
     minWidth: Math.min(900, workArea.width),

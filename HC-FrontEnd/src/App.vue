@@ -33,10 +33,15 @@ onMounted(() => {
 <template>
   <div class="app-shell">
     <aside class="sidebar">
-      <a class="brand" href="#" @click.prevent="state.page = 'analysis'"
-        ><span class="brand-symbol"><Icon name="drop" :size="23" /></span
-        ><span>HydroCalc</span></a
+      <a
+        class="brand"
+        href="#"
+        aria-label="HydroCalc Neo"
+        @click.prevent="state.page = 'analysis'"
       >
+        <span class="brand-symbol"><Icon name="drop" :size="23" /></span>
+        <span>HydroCalc Neo</span>
+      </a>
       <div class="sidebar-caption">{{ t("app.subtitle") }}</div>
       <nav :aria-label="t('nav.main')">
         <button

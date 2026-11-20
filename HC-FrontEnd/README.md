@@ -1,4 +1,4 @@
-# HydroCalc 界面
+# HydroCalc Neo 界面
 
 Vue 3 + TypeScript。开发、依赖安装和构建统一从仓库根目录执行，使用根目录的 npm lockfile。
 

@@ -1,5 +1,6 @@
 {
   "name": "hydrocalc",
+  "productName": "HydroCalc Neo",
   "version": "2.0.0",
   "description": "Soil preferential flow image analysis",
   "author": "lnk137",

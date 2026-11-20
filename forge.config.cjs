@@ -1,5 +1,6 @@
 const fs = require("node:fs");
 const path = require("node:path");
+const { productName } = require("./package.json");
 
 // 为交叉构建选择独立资源，避免将 Mac 二进制误装进 Windows 包。
 const targetPlatform =
@@ -13,7 +14,8 @@ const workerDirectory = crossWindows
 module.exports = {
   packagerConfig: {
     asar: true,
-    name: "HydroCalc",
+    name: productName,
+    // 保留旧可执行文件名、bundle ID 和 Squirrel 包名，沿用现有系统标识与实例锁。
     executableName: "HydroCalc",
     appBundleId: "com.lnk137.hydrocalc",
     appCategoryType: "public.app-category.education",
@@ -34,7 +36,7 @@ module.exports = {
       name: "@electron-forge/maker-dmg",
       platforms: ["darwin"],
       config: {
-        name: "HydroCalc",
+        name: productName,
       },
     },
     {
