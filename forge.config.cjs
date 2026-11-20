@@ -10,13 +10,16 @@ const workerDirectory = crossWindows
   ? path.join(__dirname, "dist", "win32-x64", "worker")
   : path.join(__dirname, "dist", "worker");
 
+// Windows 实例锁依赖可执行文件名；macOS 使用该名称生成系统显示名。
+const executableName = targetPlatform === "win32" ? "HydroCalc" : productName;
+
 // 计算程序放在 ASAR 外；交叉构建也必须使用目标系统和架构的真实二进制。
 module.exports = {
   packagerConfig: {
     asar: true,
     name: productName,
-    // 保留旧可执行文件名、bundle ID 和 Squirrel 包名，沿用现有系统标识与实例锁。
-    executableName: "HydroCalc",
+    executableName,
+    // 沿用 macOS 的 bundle ID，保持系统识别的应用身份。
     appBundleId: "com.lnk137.hydrocalc",
     appCategoryType: "public.app-category.education",
     icon: path.join(__dirname, "packaging", "HydroCalc"),
